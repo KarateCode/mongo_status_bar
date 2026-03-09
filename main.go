@@ -35,7 +35,7 @@ var (
 )
 
 func gradientTunnelActive() string {
-	text := "   TUNNEL ACTIVE   "
+	text := "   TUNNEL ACTIVE   "
 	runes := []rune(text)
 	n := len(runes) + 2 // +2 for the cap characters
 	var out strings.Builder
@@ -57,7 +57,11 @@ func gradientTunnelActive() string {
 		bC := uint8(float64(yellow.B)*(1-t) + float64(red.B)*t)
 		col := lipgloss.Color(fmt.Sprintf("#%02x%02x%02x", rC, gC, bC))
 
-		out.WriteString(lipgloss.NewStyle().Foreground(darkGray).Background(col).Render(string(r)))
+		if i == 0 || i == 20 {
+			out.WriteString(lipgloss.NewStyle().Foreground(col).Render(string(r)))
+		} else {
+			out.WriteString(lipgloss.NewStyle().Foreground(darkGray).Background(col).Render(string(r)))
+		}
 	}
 
 	// Trailing cap
@@ -159,7 +163,7 @@ func (m model) View() string {
 
 	var content string
 	if m.rowStatus != "" {
-		statusStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("8"))
+		statusStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("6"))
 		content = lipgloss.JoinVertical(lipgloss.Center, tunnelBox, statusStyle.Render(m.rowStatus))
 	} else {
 		content = tunnelBox
