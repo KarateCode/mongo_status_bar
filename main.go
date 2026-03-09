@@ -163,8 +163,8 @@ func (m model) View() string {
 
 	var content string
 	if m.rowStatus != "" {
-		statusStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("6"))
-		content = lipgloss.JoinVertical(lipgloss.Center, tunnelBox, statusStyle.Render(m.rowStatus))
+		statusStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#00ffff"))
+		content = tunnelBox + "          " + statusStyle.Render(m.rowStatus)
 	} else {
 		content = tunnelBox
 	}
